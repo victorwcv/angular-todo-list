@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { DEFAULT_USER, DEFAULT_PASSWORD } from '../constants/auth.constants';
 
 @Component({
   selector: 'app-form',
@@ -14,12 +14,8 @@ import { Router } from '@angular/router';
   imports: [ReactiveFormsModule],
   templateUrl: './form.component.html',
 })
-
 export class FormComponent {
   loginForm: FormGroup;
-
-  USUARIO = 'test01';
-  CONTRASENA = 'test01';
 
   constructor(private router: Router) {
     this.loginForm = new FormGroup({
@@ -32,11 +28,9 @@ export class FormComponent {
   }
 
   onSubmit() {
-
-
     const { user, password } = this.loginForm.value;
     if (this.loginForm.valid) {
-      if (user === this.USUARIO && password === this.CONTRASENA) {
+      if (user === DEFAULT_USER && password === DEFAULT_PASSWORD) {
         console.log('User: ', user, '| Password: ', password);
         alert('Login correcto');
         this.router.navigate(['tasks']);
