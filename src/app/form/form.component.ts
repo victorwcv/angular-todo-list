@@ -18,7 +18,11 @@ export class FormComponent {
   loginForm: FormGroup;
 
   constructor(private router: Router) {
-    this.loginForm = new FormGroup({
+    this.loginForm = this.createLoginForm();
+  }
+
+  private createLoginForm(): FormGroup {
+    return new FormGroup({
       user: new FormControl('', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [
         Validators.required,
