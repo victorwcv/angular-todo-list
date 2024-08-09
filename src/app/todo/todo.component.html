@@ -1,0 +1,108 @@
+<div class="container h-screen min-h[720px] mx-auto">
+  <h1 class="text-center font-semibold text-3xl sm:py-10 py-6 text-neutral-600">
+    Lista de Tareas
+  </h1>
+  <div class="mx-auto max-w-[500px] h-[80%] px-2">
+    <div
+      class="bg-white sm:px-6 px-4 py-6 rounded-xl shadow-lg w-full h-full flex flex-col"
+    >
+      <div>
+        <form
+          [formGroup]="taskForm"
+          (ngSubmit)="onSubmit()"
+          class="w-full flex"
+        >
+          <fieldset
+            class="border-2 border-pink-600 bg-white px-6 py-4 rounded-xl flex items-center justify-center gap-8 bg-pink mx-auto my-4 w-full"
+          >
+            <legend
+              class="text-neutral-600 text-xl font-semibold px-2 uppercase"
+            >
+              Agregar Tarea
+            </legend>
+            <div
+              class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
+            >
+              <input
+                id="task"
+                formControlName="task"
+                type="text"
+                class="px-3 py-2 border-b-2 border-neutral-400 outline-none w-full"
+                (keypress)="onKeyPress($event)"
+              />
+              <button
+                type="submit"
+                class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 shadow-md active:scale-95 transition-transform"
+              >
+                Agregar
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <hr class="my-2 border-pink-600" />
+      <div class="px-5 h-auto overflow-auto w-full">
+        <ul class="w-full">
+          @for (task of tasks; track task.id) {
+          <li
+            class="w-full h-12 border-b border-neutral-600  inline-flex items-center justify-between"
+          >
+            <label class="inline-flex items-center cursor-pointer w-[85%]">
+              <input
+                type="checkbox"
+                class="hidden peer"
+                (change)="task.completed = !task.completed"
+                [checked]="task.completed"
+              />
+              <span
+                class="w-5 h-5 inline-block border-2 border-gray-300 rounded-md bg-white peer-checked:bg-blue-500 peer-checked:border-blue-500 transition duration-200 ease-in-out relative"
+              >
+                <svg
+                  class="hidden w-4 h-4 text-white peer-checked:block absolute inset-0 m-auto"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </span>
+              <span
+                class="ml-2 text-gray-700 text-nowrap overflow-hidden whitespace-nowrap text-ellipsis w-[85%]"
+                >{{ task.task }}</span
+              >
+            </label>
+            @if (!task.completed) {
+            <button
+              type="button"
+              class="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 active:scale-95 transition duration-200 ease-in-out disabled:bg-neutral-500 disabled:cursor-not-allowed"
+              (click)="deleteTask(task.id)"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+            }
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

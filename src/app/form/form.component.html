@@ -1,0 +1,41 @@
+<div class="container mx-auto">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="max-w-[500px] my-10 mx-auto"
+  >
+    <fieldset
+      class="border-2 border-pink-600 bg-white p-10 rounded-xl flex items-center justify-center sm:flex-row flex-col gap-8 bg-pink shadow-xl shadow-neutral-200 m-4 m-w-[350px]"
+    >
+      <legend class="text-pink-600 text-xl font-semibold px-2 uppercase">
+        login
+      </legend>
+      <div class="flex flex-col w-full">
+        <label for="user" class="pl-2 text-neutral-600 font-semibold -mb-1"
+          >Usuario</label
+        >
+        <input
+          id="user"
+          formControlName="user"
+          type="text"
+          class="px-3 py-2 border-b-2 border-neutral-400 outline-none mb-8"
+        />
+        <label for="password" class="pl-2 text-neutral-600 font-semibold -mb-1"
+          >Contrasena</label
+        >
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          class="px-3 py-2 border-b-2 border-neutral-400 outline-none bg-opacity-50"
+        />
+      </div>
+      <button
+        type="submit"
+        class="px-6 py-3 rounded-md border-2 font-semibold text-neutral-500 border-neutral-400 hover:bg-neutral-400 hover:text-white active:shadow-neutral-400 transition-colors duration-200"
+      >
+        Ingresar
+      </button>
+    </fieldset>
+  </form>
+</div>
