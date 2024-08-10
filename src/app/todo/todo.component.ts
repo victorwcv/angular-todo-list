@@ -21,11 +21,16 @@ export class TodoComponent {
     { task: 'Tarea por hacer 3', id: crypto.randomUUID(), completed: false },
   ];
 
+  
   constructor() {
     this.taskForm = new FormGroup({
       task: new FormControl('', [Validators.required]),
       id: new FormControl(''),
     });
+  }
+
+  get completedTasks() {
+    return this.tasks.filter(task => task.completed);
   }
 
   onSubmit() {
@@ -49,6 +54,7 @@ export class TodoComponent {
     }
   }
 
+ 
   deleteTask(id: string) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
