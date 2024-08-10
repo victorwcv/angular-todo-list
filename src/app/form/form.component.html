@@ -1,13 +1,17 @@
-
 <div
   class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 to-indigo-600"
 >
   <div class="bg-white shadow-xl rounded-lg p-8 max-w-md w-full space-y-6">
+    <!-- Header -->
     <div class="text-center">
       <h2 class="text-3xl font-extrabold text-gray-800">Login</h2>
       <p class="mt-2 text-sm text-gray-500">Accede a tu cuenta</p>
     </div>
+
+    <!-- Form -->
     <form class="space-y-6" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+
+      <!-- User Input -->
       <div>
         <label for="user" class="block text-sm font-medium text-gray-700"
           >Usuario</label
@@ -21,6 +25,8 @@
           placeholder="Ingresa tu usuario"
         />
       </div>
+
+      <!-- Password Input -->
       <div>
         <label for="password" class="block text-sm font-medium text-gray-700"
           >Contraseña</label
@@ -34,7 +40,10 @@
           placeholder="Ingresa tu contraseña"
         />
       </div>
+
       <div class="flex items-center justify-between">
+
+        <!-- Remember Me Checkbox -->
         <div class="flex items-center">
           <input
             id="remember_me"
@@ -46,12 +55,14 @@
             >Recuérdame</label
           >
         </div>
+
+        <!-- Error Message -->
         <div class="text-sm">
-          <p class="text-red-600"
-            >{{ error$ | async }}</p
-          >
+          <p class="text-red-600">{{ error$ | async }}</p>
         </div>
       </div>
+
+      <!-- Submit Button -->
       <div>
         <button
           type="submit"
@@ -61,6 +72,8 @@
         </button>
       </div>
     </form>
+
+    <!-- Footer -->
     <div class="text-center text-sm text-gray-500">
       <p>
         ¿No tienes una cuenta?
