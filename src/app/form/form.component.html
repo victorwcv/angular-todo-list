@@ -25,9 +25,7 @@
         />
         <div class="h-2">
           @if(submitted && loginForm.get('user')?.invalid) {
-          <p class="text-red-600 text-sm text-right pr-1"
-            >Usuario requerido</p
-          >
+          <p class="text-red-600 text-sm text-right pr-1">Usuario requerido</p>
           }
         </div>
       </div>
@@ -47,9 +45,9 @@
         />
         <div class="h-2">
           @if(submitted && loginForm.get('user')?.invalid) {
-          <p class="text-red-600 text-sm text-right pr-1"
-            >Contraseña requerida</p
-          >
+          <p class="text-red-600 text-sm text-right pr-1">
+            Contraseña requerida
+          </p>
           }
         </div>
       </div>
@@ -95,4 +93,15 @@
       </p>
     </div>
   </div>
+  <p class="absolute text-white bottom-2">
+    Created with
+    <img src="/favicon.ico" alt=" angular-icon" class="w-5 h-5 inline-block" />
+    Angular by
+    <img
+      src="/vclogo.ico"
+      alt="logo de victor canchi"
+      class="w-5 h-5 inline-block"
+    />
+    Victor Ccanchi - 2024
+  </p>
 </div>
