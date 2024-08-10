@@ -5,14 +5,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { DEFAULT_USER, DEFAULT_PASSWORD } from '../constants/auth.constants';
 import { Store } from '@ngrx/store';
 import { AppState } from '../states/app.state';
 import { AsyncPipe } from '@angular/common';
-import { login, loginFail } from '../states/form/form.actions';
 import { Observable } from 'rxjs';
 import { selectError } from '../states/form/form.selectors';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-form',
@@ -23,8 +21,12 @@ import { selectError } from '../states/form/form.selectors';
 export class FormComponent {
   loginForm: FormGroup;
   error$: Observable<string>;
+  submitted = false;
 
-  constructor(private router: Router, private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private authService: AuthService
+  ) {
     this.loginForm = this.createLoginForm();
     this.error$ = this.store.select(selectError);
   }
@@ -37,14 +39,12 @@ export class FormComponent {
   }
 
   onSubmit() {
-    const { user, password } = this.loginForm.value;
+    this.submitted = true;
     if (this.loginForm.valid) {
-      if (user === DEFAULT_USER && password === DEFAULT_PASSWORD) {
-        this.store.dispatch(login(user, password));
-        this.router.navigate(['tasks']);
-      } else {
-        this.store.dispatch(loginFail());
-      }
+      const { user, password } = this.loginForm.value;
+      this.authService.authenticate(user, password);
+    } else {
+      this.loginForm.markAllAsTouched();
     }
   }
 }
