@@ -1,53 +1,55 @@
-<div class="container h-screen min-h[720px] mx-auto">
-  <h1 class="text-center font-semibold text-3xl sm:py-10 py-6 text-neutral-600">
-    Lista de Tareas
-  </h1>
-  <div class="mx-auto max-w-[500px] h-[80%] px-2">
-    <div
-      class="bg-white sm:px-6 px-4 py-6 rounded-xl shadow-lg w-full h-full flex flex-col"
-    >
-      <div>
-        <form
-          [formGroup]="taskForm"
-          (ngSubmit)="onSubmit()"
-          class="w-full flex"
-        >
-          <fieldset
-            class="border-2 border-pink-600 bg-white px-6 py-4 rounded-xl flex items-center justify-center gap-8 bg-pink mx-auto my-4 w-full"
-          >
-            <legend
-              class="text-neutral-600 text-xl font-semibold px-2 uppercase"
-            >
-              Agregar Tarea
-            </legend>
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
-            >
-              <input
-                id="task"
-                formControlName="task"
-                type="text"
-                class="px-3 py-2 border-b-2 border-neutral-400 outline-none w-full"
-                (keypress)="onKeyPress($event)"
-              />
-              <button
-                type="submit"
-                class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 shadow-md active:scale-95 transition-transform"
-              >
-                Agregar
-              </button>
-            </div>
-          </fieldset>
-        </form>
+<div
+  class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 to-indigo-600"
+>
+  <div class="container max-w-full sm:max-w-2xl w-full mx-auto p-4">
+    <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 h-full flex flex-col">
+      <!-- Header -->
+      <div class="flex items-center justify-between">
+        <h1 class="text-2xl sm:text-3xl font-bold text-neutral-800">
+          Lista de Tareas
+        </h1>
+        <div class="text-sm text-gray-500">
+          <span>{{ tasks.length }} tareas</span> |
+          <span>{{ completedTasks.length }} completadas</span>
+        </div>
       </div>
-      <hr class="my-2 border-pink-600" />
-      <div class="px-5 h-auto overflow-auto w-full">
-        <ul class="w-full">
+
+      <!-- Progress Bar -->
+      <div class="my-4 w-full bg-gray-200 rounded-full h-2.5">
+        <div
+          class="bg-indigo-600 h-2.5 rounded-full"
+          [style.width.%]="(completedTasks.length / tasks.length) * 100"
+        ></div>
+      </div>
+
+      <!-- Task Form -->
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="w-full mb-4">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <input
+            id="task"
+            formControlName="task"
+            type="text"
+            class="px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+            placeholder="Agregar nueva tarea"
+            (keypress)="onKeyPress($event)"
+          />
+          <button
+            type="submit"
+            class="bg-indigo-600 text-white px-4 py-3 rounded-lg hover:bg-indigo-700 shadow-md active:scale-95 transition-transform"
+          >
+            Agregar
+          </button>
+        </div>
+      </form>
+
+      <!-- Task List -->
+      <div class="flex-grow overflow-y-auto">
+        <ul class="space-y-4">
           @for (task of tasks; track task.id) {
           <li
-            class="w-full h-12 border-b border-neutral-600  inline-flex items-center justify-between"
+            class="h-16 flex items-center justify-between p-3 bg-gray-50 rounded-lg shadow-sm"
           >
-            <label class="inline-flex items-center cursor-pointer w-[85%]">
+            <label class="inline-flex items-center cursor-pointer w-full">
               <input
                 type="checkbox"
                 class="hidden peer"
@@ -55,10 +57,10 @@
                 [checked]="task.completed"
               />
               <span
-                class="w-5 h-5 inline-block border-2 border-gray-300 rounded-md bg-white peer-checked:bg-blue-500 peer-checked:border-blue-500 transition duration-200 ease-in-out relative"
+                class="w-6 h-6 border-2 border-gray-300 rounded-md bg-white peer-checked:bg-indigo-600 peer-checked:border-indigo-600 transition duration-200 ease-in-out relative"
               >
                 <svg
-                  class="hidden w-4 h-4 text-white peer-checked:block absolute inset-0 m-auto"
+                  class="hidden w-5 h-5 text-white peer-checked:block absolute inset-0 m-auto"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -73,18 +75,18 @@
                 </svg>
               </span>
               <span
-                class="ml-2 text-gray-700 text-nowrap overflow-hidden whitespace-nowrap text-ellipsis w-[85%]"
+                class="ml-3 text-gray-700 text-base text-ellipsis overflow-hidden whitespace-nowrap w-full"
                 >{{ task.task }}</span
               >
             </label>
             @if (!task.completed) {
             <button
               type="button"
-              class="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 active:scale-95 transition duration-200 ease-in-out disabled:bg-neutral-500 disabled:cursor-not-allowed"
+              class="p-2 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 active:scale-95 transition duration-200 ease-in-out"
               (click)="deleteTask(task.id)"
             >
               <svg
-                class="w-4 h-4"
+                class="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -102,6 +104,11 @@
           </li>
           }
         </ul>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-6 text-sm text-gray-500 text-center">
+        <p>¡Mantén tus tareas organizadas y finaliza tu día con éxito!</p>
       </div>
     </div>
   </div>

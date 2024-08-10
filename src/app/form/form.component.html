@@ -1,41 +1,73 @@
-<div class="container mx-auto">
-  <form
-    [formGroup]="loginForm"
-    (ngSubmit)="onSubmit()"
-    class="max-w-[500px] my-10 mx-auto"
-  >
-    <fieldset
-      class="border-2 border-pink-600 bg-white p-10 rounded-xl flex items-center justify-center sm:flex-row flex-col gap-8 bg-pink shadow-xl shadow-neutral-200 m-4 m-w-[350px]"
-    >
-      <legend class="text-pink-600 text-xl font-semibold px-2 uppercase">
-        login
-      </legend>
-      <div class="flex flex-col w-full">
-        <label for="user" class="pl-2 text-neutral-600 font-semibold -mb-1"
+
+<div
+  class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 to-indigo-600"
+>
+  <div class="bg-white shadow-xl rounded-lg p-8 max-w-md w-full space-y-6">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-gray-800">Login</h2>
+      <p class="mt-2 text-sm text-gray-500">Accede a tu cuenta</p>
+    </div>
+    <form class="space-y-6" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+      <div>
+        <label for="user" class="block text-sm font-medium text-gray-700"
           >Usuario</label
         >
         <input
-          id="user"
           formControlName="user"
           type="text"
-          class="px-3 py-2 border-b-2 border-neutral-400 outline-none mb-8"
-        />
-        <label for="password" class="pl-2 text-neutral-600 font-semibold -mb-1"
-          >Contrasena</label
-        >
-        <input
-          id="password"
-          formControlName="password"
-          type="password"
-          class="px-3 py-2 border-b-2 border-neutral-400 outline-none bg-opacity-50"
+          id="user"
+          name="user"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Ingresa tu usuario"
         />
       </div>
-      <button
-        type="submit"
-        class="px-6 py-3 rounded-md border-2 font-semibold text-neutral-500 border-neutral-400 hover:bg-neutral-400 hover:text-white active:shadow-neutral-400 transition-colors duration-200"
-      >
-        Ingresar
-      </button>
-    </fieldset>
-  </form>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700"
+          >Contraseña</label
+        >
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          name="password"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Ingresa tu contraseña"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input
+            id="remember_me"
+            name="remember_me"
+            type="checkbox"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+          />
+          <label for="remember_me" class="ml-2 block text-sm text-gray-900"
+            >Recuérdame</label
+          >
+        </div>
+        <div class="text-sm">
+          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"
+            >¿Olvidaste tu contraseña?</a
+          >
+        </div>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Ingresar
+        </button>
+      </div>
+    </form>
+    <div class="text-center text-sm text-gray-500">
+      <p>
+        ¿No tienes una cuenta?
+        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"
+          >Regístrate</a
+        >
+      </p>
+    </div>
+  </div>
 </div>
