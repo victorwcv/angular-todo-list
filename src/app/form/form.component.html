@@ -44,7 +44,7 @@
           placeholder="Ingresa tu contraseña"
         />
         <div class="h-2">
-          @if(submitted && loginForm.get('user')?.invalid) {
+          @if(submitted && loginForm.get('password')?.invalid) {
           <p class="text-red-600 text-sm text-right pr-1">
             Contraseña requerida
           </p>
